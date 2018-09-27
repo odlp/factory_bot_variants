@@ -1,25 +1,19 @@
+require "factory_bot_variants/variant_attributes"
+
 module FactoryBotVariants
   module DSL
-    def build_variants(factory_name, **attributes)
-      variants = []
+    STRATEGIES = [
+      :build,
+      :create,
+      :attributes_for,
+      :build_stubbed
+    ].freeze
 
-      common_attributes = attributes.delete(:all)
-
-      attributes.each do |attr_name, attr_values|
-        singular_attr_name = attr_name.to_s.sub(/s\z/, "")
-
-        attr_values.each_with_index do |attr_value, index|
-          variants[index] ||= {}
-          variants[index][singular_attr_name] = attr_value
+    STRATEGIES.each do |strategy|
+      define_method("#{strategy}_variants") do |factory_name, **attributes|
+        VariantAttributes.map(attributes).map do |variant_attributes|
+          ::FactoryBot.public_send(strategy, factory_name, variant_attributes)
         end
-      end
-
-      if common_attributes
-        variants.each { |variant| variant.merge!(common_attributes) }
-      end
-
-      variants.map do |variant|
-        ::FactoryBot.build(factory_name, variant)
       end
     end
   end
