@@ -6,7 +6,7 @@ module FactoryBotVariants
       common_attributes = attributes.delete(:all)
 
       attributes.each do |attr_name, attr_values|
-        singular_attr_name = attr_name.to_s.sub(/s\z/, "")
+        singular_attr_name = attr_name.to_s.sub(/s\z/, "").to_sym
 
         attr_values.each_with_index do |attr_value, index|
           variants[index] ||= {}

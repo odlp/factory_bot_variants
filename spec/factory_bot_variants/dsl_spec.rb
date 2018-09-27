@@ -13,8 +13,8 @@ RSpec.describe FactoryBotVariants::DSL do
       klass.new.build_variants(:dog, names: ["Fido", "Spot"])
 
       expect(::FactoryBot).to have_received(:build)
-        .with(:dog, { "name" => "Fido" })
-        .with(:dog, { "name" => "Spot" })
+        .with(:dog, { name: "Fido" })
+        .with(:dog, { name: "Spot" })
     end
   end
 
@@ -25,8 +25,8 @@ RSpec.describe FactoryBotVariants::DSL do
       klass.new.create_variants(:dog, names: ["Fido", "Spot"])
 
       expect(::FactoryBot).to have_received(:create)
-        .with(:dog, { "name" => "Fido" })
-        .with(:dog, { "name" => "Spot" })
+        .with(:dog, { name: "Fido" })
+        .with(:dog, { name: "Spot" })
     end
   end
 
@@ -37,8 +37,8 @@ RSpec.describe FactoryBotVariants::DSL do
       klass.new.attributes_for_variants(:dog, names: ["Fido", "Spot"])
 
       expect(::FactoryBot).to have_received(:attributes_for)
-        .with(:dog, { "name" => "Fido" })
-        .with(:dog, { "name" => "Spot" })
+        .with(:dog, { name: "Fido" })
+        .with(:dog, { name: "Spot" })
     end
   end
 
@@ -49,8 +49,8 @@ RSpec.describe FactoryBotVariants::DSL do
       klass.new.build_stubbed_variants(:dog, names: ["Fido", "Spot"])
 
       expect(::FactoryBot).to have_received(:build_stubbed)
-        .with(:dog, { "name" => "Fido" })
-        .with(:dog, { "name" => "Spot" })
+        .with(:dog, { name: "Fido" })
+        .with(:dog, { name: "Spot" })
     end
   end
 end
