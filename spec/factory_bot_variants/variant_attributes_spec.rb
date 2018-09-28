@@ -1,5 +1,5 @@
 require "factory_bot_variants/variant_attributes"
-require "factory_bot_variants/inflector"
+require "factory_bot"
 
 RSpec.describe FactoryBotVariants::VariantAttributes, "::map" do
   it "supports symbol keys" do
@@ -20,15 +20,10 @@ RSpec.describe FactoryBotVariants::VariantAttributes, "::map" do
   end
 
   describe "converting attribute names from plural to singular" do
-    it "uses the inflector" do
-      allow(FactoryBotVariants::Inflector)
-        .to receive(:singularize).and_return(:octopus)
-
+    it "uses ActiveSupport's inflector" do
       variants = described_class.map({ octopi: ["Inky", "Bubbles"] })
 
       expect(variants.first.keys).to contain_exactly :octopus
-      expect(FactoryBotVariants::Inflector)
-        .to have_received(:singularize).with("octopi")
     end
   end
 end
