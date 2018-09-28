@@ -10,9 +10,13 @@ module FactoryBotVariants
     ].freeze
 
     STRATEGIES.each do |strategy|
-      define_method("#{strategy}_variants") do |factory_name, **attributes|
+      define_method("#{strategy}_variants") do |factory_name, *options|
+        attributes = options.extract_options!
+
         VariantAttributes.map(attributes).map do |variant_attributes|
-          ::FactoryBot.public_send(strategy, factory_name, variant_attributes)
+          ::FactoryBot.public_send(
+            strategy, factory_name, *options, variant_attributes
+          )
         end
       end
     end

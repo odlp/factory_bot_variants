@@ -4,13 +4,18 @@ require "factory_bot_variants/dsl"
 RSpec.describe "FactoryBot variants" do
   include FactoryBotVariants::DSL
 
-  Dog = Struct.new(:name, :age, :cute)
+  Dog = Struct.new(:name, :age, :cute, :fluffy)
 
   FactoryBot.define do
     factory :dog do
       name { "Scruffles" }
       age { 1 }
       cute { true }
+      fluffy { true }
+
+      trait :shaved do
+        fluffy { false }
+      end
     end
   end
 
@@ -30,6 +35,16 @@ RSpec.describe "FactoryBot variants" do
 
     expect(dog_2.name).to eq "Benji"
     expect(dog_2.age).to eq 12
+  end
+
+  it "allows traits to be specified" do
+    dog_1, dog_2 = build_variants(:dog, :shaved, names: ["Fido", "Benji"])
+
+    expect(dog_1.name).to eq "Fido"
+    expect(dog_1.fluffy).to be false
+
+    expect(dog_2.name).to eq "Benji"
+    expect(dog_2.fluffy).to be false
   end
 
   describe "'all' key" do
