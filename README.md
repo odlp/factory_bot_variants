@@ -1,7 +1,7 @@
 # FactoryBotVariants
 
-In tests, particularly when asserting the order of entities, it's common to
-create several objects which vary by only one or two attributes:
+In tests it's common to create several objects which vary by only one or two
+attributes (particularly when asserting the order, or filtering, of entities):
 
 ```ruby
 it "sorts dogs oldest to youngest" do
