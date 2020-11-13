@@ -49,10 +49,9 @@ PLATFORMS
 
 DEPENDENCIES
   appraisal (~> 2.2)
-  bundler (~> 1.16)
   factory_bot_variants!
   rake
   rspec (~> 3.8)
 
 BUNDLED WITH
-   1.17.3
+   2.1.4

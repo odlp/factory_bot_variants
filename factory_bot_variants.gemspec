@@ -24,7 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "factory_bot", ">= 4.8", "< 7"
 
   spec.add_development_dependency "appraisal", "~> 2.2"
-  spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec", "~> 3.8"
 end
